@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="https://logging.apache.org/xml/ns">
+
+    <Appenders>
+        <Console name="CONSOLE">
+            <PatternLayout pattern="%d{ABSOLUTE} [%t] %p %c - %m%n" />
+        </Console>
+    </Appenders>
+
+    <Loggers>
+        <Root level="INFO">
+            <AppenderRef ref="CONSOLE"/>
+        </Root>
+    </Loggers>
+
+</Configuration>
