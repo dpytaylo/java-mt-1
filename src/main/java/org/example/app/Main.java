@@ -9,6 +9,7 @@ import java.time.Instant;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 import org.example.app.service.FormatStringService;
+import org.example.app.service.RateLimiter;
 
 public class Main {
     private static final Logger logger = LogManager.getLogger();
@@ -29,7 +30,7 @@ public class Main {
         var start = Instant.now();
         for (var id : strings) {
             new Thread(() -> {
-                var output = formatStringService.run(id);
+                var output = formatStringService.executeService(id);
                 var finish = Instant.now();
                 var timeElapsed = Duration.between(start, finish).toMillis();
                 logger.info("Input: \"{}\"; Output: \"{}\"; Elapsed: {}", id, output, timeElapsed);

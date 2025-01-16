@@ -1,10 +1,8 @@
-package org.example.app;
-
-import org.example.app.service.FormatStringService;
+package org.example.app.service;
 
 import java.util.concurrent.Semaphore;
 
-public class RateLimiter<T extends FormatStringService> {
+public class RateLimiter<T extends Service> implements Service {
     private final T service;
     private final Semaphore semaphore;
 
@@ -13,14 +11,16 @@ public class RateLimiter<T extends FormatStringService> {
         this.semaphore = new Semaphore(rateLimit);
     }
 
-    public String run(String input) {
+    @Override
+    public String executeService(String input) {
         try {
             semaphore.acquire();
         } catch (InterruptedException e) {
+            semaphore.release();
             throw new RuntimeException(e);
         }
 
-        var result = service.run(input);
+        var result = service.executeService(input);
         semaphore.release();
         return result;
     }

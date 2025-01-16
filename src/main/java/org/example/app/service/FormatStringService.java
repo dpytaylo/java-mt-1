@@ -6,7 +6,7 @@ public enum FormatStringService implements Service {
     INSTANCE;
 
     @Override
-    public String run(String input) {
+    public String executeService(String input) {
         try {
             TimeUnit.SECONDS.sleep(2);
         } catch (InterruptedException e) {
